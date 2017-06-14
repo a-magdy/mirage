@@ -4,7 +4,6 @@ import 'rxjs/add/operator/toPromise';
 declare var Appbase;
 
 @Injectable()
-
 export class AppbaseService {
 	constructor(private http: Http) {}
 	public requestParam: any = {
@@ -36,12 +35,16 @@ export class AppbaseService {
 	}
 	get(path: string) {
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		var request_url = this.requestParam.url.replace(this.config.username + ':' + this.config.password + '@', '');
 		var request_path = request_url + path + '/';
 		console.log(request_path);
+		console.log(headers);
 		return this.http.get(request_path, { headers: headers }).toPromise();
 	}
 	getMappings() {
@@ -67,8 +70,11 @@ export class AppbaseService {
 
 		function getRequest(path) {
 			let headers = new Headers({
+				'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+				// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 				'Content-Type': 'application/json;charset=UTF-8',
-				'Authorization': self.requestParam.auth
+				'Authorization': self.requestParam.auth,
+				'Access-Control-Allow-Origin': '*',
 			});
 			var request_url = self.requestParam.url.replace(self.config.username + ':' + self.config.password + '@', '');
 			var request_path = request_url + path + '/';
@@ -78,41 +84,57 @@ export class AppbaseService {
 	}
 	getVersion() {
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		var request_url = this.requestParam.pureurl.replace(this.config.username + ':' + this.config.password + '@', '');
 		var request_path = request_url + '/';
 		console.log(request_path);
+		console.log({headers});
 		return this.http.get(request_path, { headers: headers }).toPromise()
 	}
 	post(path: string, data: any) {
 		let requestData = JSON.stringify(data);
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		return this.http.post(this.requestParam.url + path, requestData, { headers: headers }).toPromise()
 	}
 	posturl(url: string, data: any) {
 		let requestData = JSON.stringify(data);
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		return this.http.post(url, requestData, { headers: headers }).toPromise()
 	}
 	put(path: string, data: any) {
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		return this.http.put(this.requestParam.url + path, data, { headers: headers }).toPromise()
 	}
 	delete(path: string) {
 		let headers = new Headers({
+			'Access-Control-Allow-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
+			// 'Access-Control-Request-Headers': 'X-Requested-With, X-Auth-Token, Content-Type, Content-Length, Authorization',
 			'Content-Type': 'application/json;charset=UTF-8',
-			'Authorization': this.requestParam.auth
+			'Authorization': this.requestParam.auth,
+			'Access-Control-Allow-Origin': '*',
 		});
 		return this.http.delete(this.requestParam.url + path, { headers: headers }).toPromise()
 	}
